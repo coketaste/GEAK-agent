@@ -10,6 +10,7 @@ class ProblemState:
     instruction: Optional[str] = None
     solution: Optional[str] = None
     speedup: float = 0.0
+    difficulty: Optional[int] = None
 
 @dataclass
 class ProblemStateROCm:
@@ -23,6 +24,7 @@ class ProblemStateROCm:
     pass_call: bool = False
     pass_exe: bool = False
     speedup: float = 0.0
+    difficulty: Optional[int] = None
 
 @dataclass
 class tempCode:

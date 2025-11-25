@@ -10,7 +10,13 @@ def main():
     args = load_config("configs/tritonbench_gaagent_config.yaml")
 
     # setup LLM model
-    model = ClaudeModel(api_key=args.api_key, model_id=args.model_id)
+    if "gpt" in args.model_id.lower() or "dvue" in args.model_id.lower():
+        model = OpenAIModel(api_key=args.api_key, model_id=args.model_id)
+    elif "claude" in args.model_id.lower():
+        model = ClaudeModel(api_key=args.api_key, model_id=args.model_id)
+    else:
+        # Default to OpenAI for unknown models
+        model = OpenAIModel(api_key=args.api_key, model_id=args.model_id)
 
     # setup dataset
     dataset = TritonBench(statis_path=args.statis_path, 

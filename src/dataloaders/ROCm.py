@@ -7,9 +7,9 @@ from multiprocessing import Pool, Lock, Value
 
 # Assuming these are in your project structure
 from dataloaders.ProblemState import ProblemStateROCm
-from tb_eval.evaluators.interface import get_evaluators
-from tb_eval.helpers.helper import extract_first_pytest_failure
-from tb_eval.perf.efficiency import get_perf_evaluators
+from geak_eval.evaluators.interface import get_evaluators
+from geak_eval.helpers.helper import extract_first_pytest_failure
+from geak_eval.perf.efficiency import get_perf_evaluators
 
 class ROCm:
     def __init__(self,
@@ -28,7 +28,7 @@ class ROCm:
         self.problem_states = self.load_ps()
         self.log_root = log_root
         
-        # Initialize correctness and performance evaluators from tb_eval
+        # Initialize correctness and performance evaluators from geak_eval
         self.evaluator = get_evaluators["rocm"]()
         self.perf_evaluator = get_perf_evaluators["rocm"]()
         logger.info("Custom tests path set to: {}".format(self.py_folder))
@@ -125,7 +125,7 @@ class ROCm:
 
     def run_perf_evaluation(self, exec_folder, gen_perf_folder, gpu_id=0):
         """
-        Runs the performance evaluation for ROCm using the tb_eval module.
+        Runs the performance evaluation for ROCm using the geak_eval module.
 
         Args:
             exec_folder (str): The directory containing the correctly executed scripts.
