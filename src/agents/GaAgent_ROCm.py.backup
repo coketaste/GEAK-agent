@@ -252,7 +252,7 @@ class GaAgent(Reflexion_Oneshot):
             root, extension = os.path.splitext(output_path)
             exe_dir = os.path.join(root,exe_dir) if output_path else exe_dir
             perf_result_dir = os.path.join(root, perf_result_dir) if output_path else perf_result_dir
-            if not os.path.exists(exe_dir) or not os.listdir(exe_dir):
+            if not os.listdir(exe_dir):
                 pass
                 logger.warning(f"No scripts passed correctness checks in iteration {iter}. Skipping performance evaluation.")
             else:

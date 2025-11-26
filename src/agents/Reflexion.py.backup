@@ -16,7 +16,7 @@ class Reflexion(SequentialBaseAgent):
     def memory_init(self):
         return [ReflexionMemory(ps) for ps in self.dataset.problem_states]
 
-    def run_single_pass(self, mem: ReflexionMemory, verbose=False, temperature=1.0):
+    def run_single_pass(self, mem: ReflexionMemory, verbose=False):
         if mem.ps.pass_call:
             return
         # generate solution
@@ -35,7 +35,7 @@ class Reflexion(SequentialBaseAgent):
         msg = [
             {"role": "user", "content": text},
         ]
-        response = self.model.generate(msg, temperature=temperature)
+        response = self.model.generate(msg)
         mem.ps.solution = clear_code(response)
 
         # run script on gpu
@@ -55,7 +55,7 @@ class Reflexion(SequentialBaseAgent):
                     "content": reflect_txt
                 }
             ]
-            mem.reflection = self.model.generate(reflect_msg, temperature=temperature)
+            mem.reflection = self.model.generate(reflect_msg)
         # else:
         #     mem.ps.pass_call = True
 
